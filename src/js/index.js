@@ -40,6 +40,7 @@
   const saveBtn = document.getElementById('save');
   saveBtn.addEventListener('click', () => {
     Array.from(inputs).forEach(input => {
+      // Store a value directly in the browser's localStorage.
       localStorage.setItem(input.getAttribute('id'), input.value);
     });
   });
@@ -60,6 +61,7 @@
 
 $(document).ready(function () {
 
+  // Click the target element.
   $('#heard-about').click(function () {
     if ($("#textarea").attr("disabled")) {
       $('#textarea').removeAttr("disabled");

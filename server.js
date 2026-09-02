@@ -1,3 +1,4 @@
+// Small Express server used to serve the demo application locally.
 var express = require('express');
 var app = express();
 

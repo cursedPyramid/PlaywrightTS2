@@ -1,6 +1,7 @@
 
 (() => {
   'use strict'
+  // Create a Map containing key/value pairs for parameterised tests.
   const periodYields = new Map([
     [0.5, 0.04],
     [1, 0.05],
