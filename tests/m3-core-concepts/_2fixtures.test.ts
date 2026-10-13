@@ -12,7 +12,7 @@ test('Test with Page fixture', async ({ page }) => {
 });
 
 
-// Define a test case (or setup step) with an async function as its body.
+// Fixtures must always be surrounded by curly braces otherwise the syntax is invalid.
 test('Other fixtures', async ({ browserName, browser, context, page }) => {
 
     // Create a new page/tab in the browser context.

@@ -4,17 +4,17 @@ import { test } from '@playwright/test';
 
 
 // Define a test case (or setup step) with an async function as its body.
-test('Test title 1', async () => {
+test('Unique test name in file', async () => {
   
 });
 
-// Define a test case (or setup step) with an async function as its body.
+// Test titles must be unique within a file.
 test('Test title 2', async () => {
 
   
 });
 
-// Define a test case (or setup step) with an async function as its body.
+// Currently the Playwright extension will not immediately capture new tests under Testing; the IDE must be restarted.
 test('Test title 3', async () => {
 
   
