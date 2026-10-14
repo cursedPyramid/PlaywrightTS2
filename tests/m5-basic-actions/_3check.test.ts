@@ -1,6 +1,6 @@
 // Example from m5-basic-actions: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 // Define a test case (or setup step) with an async function as its body.
 test('Check test', async ({ page }) => {
@@ -21,5 +21,6 @@ test('Check test', async ({ page }) => {
     await textarea.fill(message);
 
     // Assert the form control contains the expected value.
+    // Note that toContainText will not work because that is for the text that is located between HTML tags
     await expect(textarea).toHaveValue(message);
 });

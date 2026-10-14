@@ -1,6 +1,6 @@
 // Example from m5-basic-actions: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 const homeTitle = 'Credit Association';
 

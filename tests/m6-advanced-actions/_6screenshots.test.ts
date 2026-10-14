@@ -1,6 +1,6 @@
 // Example from m6-advanced-actions: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 // Define a test case (or setup step) with an async function as its body.
 test('Screenshot demo', async ({ page }) => {
@@ -20,7 +20,7 @@ test('Screenshot demo', async ({ page }) => {
     page.screenshot({
         path: 'screenshots/screenshot-advanced.jpeg',
         fullPage: true,
-        // Locate an element using its data-testid attribute.
+        // Mask will hide an element from the screenshot. For use with sensitive data.
         mask: await page.getByTestId('location').all()
     });
 

@@ -1,6 +1,6 @@
 // Example from m4-locators: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 // Define a test case (or setup step) with an async function as its body.
 test('Multiple matches fails', async ({ page }) => {
@@ -8,7 +8,7 @@ test('Multiple matches fails', async ({ page }) => {
     // Navigate the browser page to the specified URL.
     await page.goto('/');
 
-    // Locate the element by its accessible role/name and click it.
+    // Because there are multiple links, Playwright will refuse to click on any of them and this fail fast.
     await page.getByRole('link').click();
 
 });
@@ -45,7 +45,7 @@ test('Multiple matches test - count or iterate', async ({ page }) => {
     // Assert the locator matches the expected number of elements.
     await expect(feedback).toHaveCount(3);
 
-    // Resolve all currently matched elements into an array of locators.
+    // The all function converts the single locator to an array of locators.
     for(const message of await feedback.all()) {
         // click, other actions
         console.log(`${await message.textContent()}`);

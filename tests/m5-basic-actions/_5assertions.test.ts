@@ -1,6 +1,6 @@
 // Example from m5-basic-actions: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 // Define a test case (or setup step) with an async function as its body.
 test('Check test', async ({ page }) => {
@@ -59,7 +59,7 @@ test('Test with negating matchers', async ({ page }) => {
     // Locate an element using its data-testid attribute.
     await expect(page.getByTestId('location')).toContainText('New York');
 
-    // Locate an element using its data-testid attribute.
+    // Not negates the function.
     await expect(page.getByTestId('location')).not.toContainText('London');
 });
 
@@ -69,7 +69,7 @@ test('Test with soft assertions', async ({ page }) => {
     // Navigate the browser page to the specified URL.
     await page.goto('/');
 
-    // Locate an element using its data-testid attribute.
+    // The soft keyword means that the test will keep running even on failure.
     await expect.soft(page.getByTestId('location')).toContainText('Mumbai');
     // Locate an element using its data-testid attribute.
     await expect.soft(page.getByTestId('location')).toContainText('Tokyo');

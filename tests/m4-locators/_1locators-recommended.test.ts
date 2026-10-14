@@ -1,6 +1,6 @@
 // Example from m4-locators: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 // Define a test case (or setup step) with an async function as its body.
 test('Recommended built-in locators examples', async ({ page }) => {
@@ -14,10 +14,12 @@ test('Recommended built-in locators examples', async ({ page }) => {
     // Clear the current value from the input.
     await firstName.clear();
 
-    // Locate a form control using its associated accessible label.
+    // If a locator is only needed once, then it can be chained
+    // Note that the await is not needed for the locator but for the fill action
     await page.getByLabel('First name').fill('Cursed');
 
     // Locate the element by its accessible role/name and click it.
+    // Exact will make the locator case‑sensitive and demand the whole string to match
     await page.getByRole('button', { name: 'Register', exact: true }).click();
 
     // Store a locator/result in a constant so it can be reused below.

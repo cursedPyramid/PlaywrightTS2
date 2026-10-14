@@ -1,6 +1,6 @@
 // Example from m6-advanced-actions: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 const name = 'Sofia';
 
@@ -40,7 +40,7 @@ test('Local Storage', async ({ page }) => {
     // Locate the element by its accessible role/name and click it.
     await page.getByRole('button', { name: 'Save Input' }).click();
 
-    // Store a locator/result in a constant so it can be reused below.
+    // Store a snapshot of the storage state so it can be reused below.
     const storage = await page.context().storageState();
 
     console.log(storage.cookies);
@@ -61,12 +61,11 @@ test('Session (or Local) Storage', async ({ page }) => {
     // Locate the element by its accessible role/name and click it.
     await page.getByRole('button', { name: 'Save Input' }).click();
 
-    // Store a locator/result in a constant so it can be reused below.
+    // Store a piece of JavaScript inside the evaluate function. For example, get the localStorage from the global window object, and this function returns a result.
     const storage = await page.evaluate(() => window.localStorage);
     console.log(storage);
 
     // clear
-    // Clear the current value from the input.
     await page.evaluate(() => window.localStorage.clear());
     // Reload the current page.
     await page.reload();
@@ -74,7 +73,7 @@ test('Session (or Local) Storage', async ({ page }) => {
     await expect(input).toHaveValue('');
 
     // set
-    // Execute JavaScript in the context of the loaded web page.
+    // Here we can set the state, and if it's a big piece of code, it can be wrapped it into a function and pass it in.
     await page.evaluate(setLocalStorage);
     // Reload the current page.
     await page.reload();

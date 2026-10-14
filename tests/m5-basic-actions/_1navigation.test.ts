@@ -1,6 +1,6 @@
 // Example from m5-basic-actions: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 const homeTitle = 'Credit Association';
 const savingsTitle = 'Save with us';
@@ -36,7 +36,7 @@ test('Back, forward, reload (refresh) test', async ({ page }) => {
 // Define a test case (or setup step) with an async function as its body.
 test('Navigation test', async ({ page }) => {
 
-    // Navigate the browser page to the specified URL.
+    // Navigate the browser page to the specified URL within a certain time.
     await page.goto('/', { waitUntil: 'load', timeout: 100 });
     // Assert that the page has the expected title.
     await expect(page).toHaveTitle(homeTitle);

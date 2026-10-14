@@ -8,11 +8,11 @@ test('Filtering demo', async ({ page }) => {
     // Navigate the browser page to the specified URL.
     await page.goto('/savings.html');
 
-    // Store a locator/result in a constant so it can be reused below.
+    // Store a locator/result in a constant and print the result to the console.
     const rows = page.getByRole('row');
     console.log(await rows.count());
 
-    // Store a locator/result in a constant so it can be reused below.
+    // Filter and store a locator/result in a constant so it can be reused below.
     const row = page.getByRole('row')
         // Narrow the locator to elements matching the supplied condition.
         .filter({ hasText: 'Competition' });

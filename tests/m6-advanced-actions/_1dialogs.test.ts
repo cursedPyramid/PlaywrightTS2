@@ -1,6 +1,6 @@
 // Example from m6-advanced-actions: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 const name = 'Sofia';
 
@@ -17,9 +17,9 @@ test('Dialog test - Default handling is to dismiss', async ({ page }) => {
     // Assert the form control contains the expected value.
     await expect(input).toHaveValue(name);
 
-    // Locate the element by its accessible role/name and click it.
+    // Clicking Clear will present an OK Cancel dialog.
     await page.getByRole('button', { name: 'Clear' }).click();
-    // Assert the form control contains the expected value.
+    // Playwright dismisses dialogs by default so the name value is retained.
     await expect(input).toHaveValue(name);
 
 });
@@ -27,7 +27,7 @@ test('Dialog test - Default handling is to dismiss', async ({ page }) => {
 // Define a test case (or setup step) with an async function as its body.
 test('Dialog test - OK or Dismiss', async ({ page }) => {
 
-    // Register an event listener that handles the next occurrence only.
+    // Register an event listener that handles the next occurrence only. Use page.on to keep the listener active throughout the test.
     page.once('dialog', dialog => dialog.accept());
 
     // Navigate the browser page to the specified URL.
@@ -38,9 +38,9 @@ test('Dialog test - OK or Dismiss', async ({ page }) => {
     // Fill the form control with the supplied value.
     await input.fill(name);
 
-    // Locate the element by its accessible role/name and click it.
+    // As before, clicking Clear will present an OK Cancel dialog.
     await page.getByRole('button', { name: 'Clear' }).click();
-    // Assert the form control contains the expected value.
+    // Because of the previous page.once, Playwright will now Accept the dialog so the name is cleared.
     await expect(input).toHaveValue('');
     
 });

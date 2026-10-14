@@ -1,6 +1,6 @@
 // Example from m6-advanced-actions: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 // Import a supporting Node.js/package module used by this example.
 import fs from 'fs';
 
@@ -10,7 +10,7 @@ test('Download a Single file and assert', async ({ page }) => {
     // Navigate the browser page to the specified URL.
     await page.goto('/savings.html');
 
-    // Store a locator/result in a constant so it can be reused below.
+    // This will fail in headless: false if a file can be previewed, like a text file or a PDF file is because there was no download event. Instead the browser will navigate to a new page.
     const downloadPromise = page.waitForEvent('download');
 
     // Locate an element by its visible text.
@@ -24,10 +24,10 @@ test('Download a Single file and assert', async ({ page }) => {
     // Save the downloaded file to the specified path.
     await download.saveAs(filePath);
 
-    // Assert that the actual value satisfies the expected condition.
+    // Downloads don't have to be saved, just checked if they were successful. Invoke the failure function, and if there was no failure, then it returns null.
     expect(await download.failure()).toBeNull();
 
-    // Assert that the actual value satisfies the expected condition.
+    // Verifies that that the file exists after the download completes.
     expect(fs.existsSync(filePath)).toBeTruthy();
 
     // Read file metadata, such as its size.
@@ -44,10 +44,10 @@ test('Upload', async ({ page }) => {
     // Navigate the browser page to the specified URL.
     await page.goto('/loans.html');
 
-    // Store a locator/result in a constant so it can be reused below.
+    // Locate the input, typically, it is of type file.
     const uploadInput = page.locator('input[type="file"]');
 
-    // Set the files selected by an <input type="file"> control.
+    // Pass in the path to the file, starting from the root of the project. The brackets make it an array for multiple files, else ('download/dummy.pdf') for a single file.
     await uploadInput.setInputFiles(['download/dummy.pdf']);
 
     //clear
