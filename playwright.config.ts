@@ -11,10 +11,10 @@ export default defineConfig({
   // Configure how Playwright reports test results.
   reporter: 'html',
   // Allow independent tests to run in parallel where Playwright can do so.
-  fullyParallel: true,
+  fullyParallel: true, // Recommended setting for any project. Can be overridden in the individual files
 
   // nested
-  expect: {
+  expect: { //  This alters the behavior of the expect assertions
     timeout: 3000
   },
 
@@ -23,7 +23,7 @@ export default defineConfig({
     // Configure when Playwright records a trace for debugging.
     trace: 'on-first-retry',
 
-    // timezoneId: 'Africa/Lagos', // applied to all tests, except those that override it
+    // timezoneId: 'Africa/Lagos', // applied to all tests, except those tests that override it
     // Base URL used when tests call page.goto() with a relative path.
     baseURL: 'http://localhost:3000/',
     // Configure when Playwright captures screenshots.
@@ -42,7 +42,7 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
   },
 
-  // Define separate Playwright test projects/configurations.
+  // Projects let you group and run tests on different browsers, emulated devices, and with different configurations.
   projects: [
     {
       name: 'chromium',
@@ -53,27 +53,28 @@ export default defineConfig({
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] }
     },
+
     {
       name: 'Mobile Safari',
       use: { ...devices['iPhone 12'] },
-      testDir: './tests/mobile'
+      testDir: './tests/mobile'  // Run tests only in this particular folder
     },
 
     // by purpose
     {
       name: 'Smoke',
-      testMatch: /.*smoke.test.ts/,
+      testMatch: /.*smoke.test.ts/,  //  Only run tests that match this pattern.
       // Number of times Playwright retries a failed test.
       retries: 0
     },
 
     {
       name: 'Regular',
-      testIgnore: /.*smoke.test.ts/,
+      testIgnore: /.*smoke.test.ts/,  //  Ignore the smoke tests, but run everything else.
       // Number of times Playwright retries a failed test.
       retries: 2,
       use: {
-        // ...
+        // Gives access to another 20 or so configurable properties to define the environment and the behavior of tests.
       }
     },
 
@@ -82,6 +83,7 @@ export default defineConfig({
       testMatch: '_4global_config.test.ts',
       // This project depends on the named setup projects completing first.
       dependencies: ['setup', 'admin-auth', 'populate-db'],
+      // teardown: 'cleanup' // Correct but per Playwright documentation, a common way to do things is to place or couple the teardown with the corresponding setup
     },
 
     {

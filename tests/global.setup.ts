@@ -5,7 +5,7 @@ import { test as setup } from '@playwright/test';
 setup.use({});
 
 // Define a test case (or setup step) with an async function as its body.
-setup('Do setup', async ({ page }) => {
+setup('Do setup', async () => {
 
     console.log('Setup');
 

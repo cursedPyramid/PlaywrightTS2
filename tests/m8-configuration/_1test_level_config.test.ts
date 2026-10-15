@@ -1,22 +1,25 @@
 // Example from m8-configuration: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, chromium } from '@playwright/test';
+import { chromium, test } from '@playwright/test';
 
-// Define a test case (or setup step) with an async function as its body.
+// playwright is the top-level fixture meaning that different browser instances can be launched.
 test('Playwright: top-level API', async ({ playwright }) => {
 
     // Launch a browser instance with the supplied options.
     const firefoxType = await playwright.firefox.launch();
     // Create an isolated browser context with its own configuration/state.
-    const ctx = await firefoxType.newContext();
-    // Create a new page/tab in the browser context.
-    const page = await ctx.newPage();
+    const context = await firefoxType.newContext();
+    // Create a new page/tab within the browser context.
+    const page = await context.newPage();
 
     // Navigate the browser page to the specified URL.
     await page.goto('');
 
     // Launch a browser instance with the supplied options.
-    const chromium = await playwright.chromium.launch();
+    const chromiumType = await playwright.chromium.launch();
+    const context2 = await chromiumType.newContext();
+    const page2 = await context2.newPage();
+    await page2.goto('');
     // ...
 
 });

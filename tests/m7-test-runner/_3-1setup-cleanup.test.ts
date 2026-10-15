@@ -1,8 +1,8 @@
 // Example from m7-test-runner: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
-// Test lifecycle hook: Runs once before the tests in the scope.
+// Test lifecycle hook: Runs once per worker process before all tests.
 test.beforeAll('Meaningful description', async () => {
 
     console.log('Before All setup');
@@ -37,7 +37,7 @@ test('Test 2', async ({ page }) => {
 });
 
 // Test lifecycle hook: Runs after every test in the scope.
-test.afterEach('Meaningful description', async ({ page }) => {
+test.afterEach('Meaningful description', async () => {
 
     console.log('After Each cleanup');
 

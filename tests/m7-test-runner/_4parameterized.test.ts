@@ -1,13 +1,13 @@
 // Example from m7-test-runner: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 const people = ['Alice', 'Bob'];
 
 // Repeat the test/action for each item in the collection.
 for(const name of people) {
 
-    // Define a test case (or setup step) with an async function as its body.
+    // Backticks are used for the test title so that string interpolation can be used to pass in the parameter value.
     test(`Testing ${name}`, async () => {
 
         console.log(name);
@@ -34,6 +34,7 @@ for(const [key, value] of map1) {
 
 }
 
+// If there are three or more values to pass in when not stored in a .csv or external file.
 const inputs = [
     ["a", 1, 2],
     ["b", 3, 4],

@@ -2,10 +2,10 @@
 // Import the Playwright classes/functions needed by this file.
 import { test as setup } from '@playwright/test';
 
-setup.use({  });
+setup.use({});
 
 // Define a test case (or setup step) with an async function as its body.
-setup('Populate DB', async ({ page }) => {
+setup('Populate DB', async () => {
      
      console.log('Populate DB');
      

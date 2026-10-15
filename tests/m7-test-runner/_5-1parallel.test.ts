@@ -3,7 +3,7 @@
 import { test } from '@playwright/test';
 
 // Group related tests together.
-test.describe.configure({ mode: 'serial' }); // Serial not recommended; use beforeAll or beforeEach hooks if one test relies on another
+test.describe.configure({ mode: 'serial' }); // Serial not recommended; use beforeAll or beforeEach hooks if one test relies on another. Overrides fullyParallel: true in playwright.config.
 
 // Define a test case (or setup step) with an async function as its body.
 test('Test 1', async () => {

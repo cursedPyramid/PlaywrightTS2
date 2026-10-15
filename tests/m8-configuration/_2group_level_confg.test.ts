@@ -2,7 +2,7 @@
 // Import the Playwright classes/functions needed by this file.
 import { test } from '@playwright/test';
 
-// Override Playwright settings for the following test scope.
+// Override Playwright settings to all tests in a file.
 test.use({
     // geolocation, httpCredentials, viewport, baseURL, javaScriptEnabled, screenshot, video...
     // Create an isolated browser context with its own configuration/state.
@@ -27,10 +27,10 @@ test('Test 1', async ({ page }) => {
 // Group related tests together.
 test.describe('Group Title', () => {
 
-    // Override Playwright settings for the following test scope.
+    // Override Playwright settings to apply to tests inside the describe group.
     test.use({
         // Emulate the specified time zone in the browser context.
-        timezoneId: 'America/Toronto' // closer to test, overrides the top-level config
+        timezoneId: 'America/Toronto' // closer to test and so will override the top-level config
     });
 
     // Define a test case (or setup step) with an async function as its body.

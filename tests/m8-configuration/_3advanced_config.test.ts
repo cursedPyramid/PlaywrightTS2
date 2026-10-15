@@ -1,18 +1,18 @@
 // Example from m8-configuration: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, chromium, devices } from '@playwright/test';
+import { chromium, devices, test } from '@playwright/test';
 
-const iPad = devices['iPad Pro 11'];
+const iPad = devices['iPad Pro 11']; // Emulates a device for testing
 
 const slowAndHeadless = { headless: false, slowMo: 2000 };
 
-// Define the TypeScript shape of this data object.
+// Sample code that boxes the LocationData.
 interface LocationData {
     latitude: number;
     longitude: number;
 }
 
-// A Record maps string keys to values of the specified TypeScript type.
+// A collection of records that map string to LocationData.
 const locationCoordinates: Record<string, LocationData> = {
     London: { latitude: 51.509865, longitude: -0.118092 },
     Rome: { latitude: 41.9027835, longitude: 12.4963655 },

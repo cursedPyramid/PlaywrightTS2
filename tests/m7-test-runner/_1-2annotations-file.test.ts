@@ -2,29 +2,28 @@
 // Import the Playwright classes/functions needed by this file.
 import { test } from '@playwright/test';
 
-// Define a test case (or setup step) with an async function as its body.
+// Unconditional skip - it will always take effect for all tests in the file..
 test.skip();
 
-// Define a test case (or setup step) with an async function as its body.
+// Test will not run because of top level skip.
 test('Will not run 1', async () => {
     console.log("Test 1");
 });
 
-// Define a test case (or setup step) with an async function as its body.
+// Test will not run because of top level skip.
 test('Will not run 2', async () => {
     console.log("Test 2");
 });
 
-// Define a test case (or setup step) with an async function as its body.
+// Test will not run because of top level skip. But there is no conflict because fixme will be skipped.
 test.fixme('Will not run 3', async () => {
     
     console.log("Test 3");
 });
 
-// Define a test case (or setup step) with an async function as its body.
+// Test will not run because of top level skip
 test('Will not run 4', async () => {
 
-    // Define a test case (or setup step) with an async function as its body.
     test.fail();
     console.log("Test 4");
 });

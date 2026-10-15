@@ -24,10 +24,10 @@ test.describe.skip('Feature A Group', () => {
 // Group related tests together.
 test.describe('Feature B Group', () => {
 
-    // Define a test case (or setup step) with an async function as its body.
+    // Use this syntax to conditionally skip groups of tests.
     test.skip(({ browserName }) => browserName === 'chromium', 'Does not work on Chromium, ticket ABC-123');
 
-    // test.skip(browserName === 'chromium', 'Does not work on Chromium, ticket ABC-123'); // Incorrect. Use only to skip individual tests.
+    // test.skip(browserName === 'chromium', 'Does not work on Chromium, ticket ABC-123'); // Incorrect. Cannot be used outside of a test. Use this syntax to conditionally skip individual tests.
 
     // Define a test case (or setup step) with an async function as its body.
     test('Test B.1', async ({ page }) => {
