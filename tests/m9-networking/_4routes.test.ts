@@ -1,22 +1,22 @@
 // Example from m9-networking: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 
-// test.use({ javaScriptEnabled: false });
+// test.use({ javaScriptEnabled: false }); // This disables all JavaScript, including the one already hard‑coded or present in the page.
 
-// Define a test case (or setup step) with an async function as its body.
+// Whereas route will block all additional JavaScript getting loaded and taking effect.
 test('Route Abort - JS block', async ({ page }) => {
 
-    // or **/*.{png,jpg,jpeg}
-    // Intercept matching network requests and decide how Playwright should handle them.
+    // or **/*.{png, jpg, jpeg}
+    // This blocks all incoming HTTP responses carrying JavaScript files.
     page.route('**/*.{js}', route => route.abort());
 
-    // Navigate the browser page to the specified URL.
+    // Navigate to the page of interest.
     await page.goto('/savings.html');
-    // Locate an element using its data-testid attribute.
+    // Find and type something into an input.
     await page.getByTestId('deposit').fill('10');
 
-    // Locate an element using its data-testid attribute.
+    // Verify that the message box is not visible.
     await expect(page.getByTestId('result')).not.toBeVisible();
 });
 
@@ -27,7 +27,7 @@ test('Route with a condition', async ({ page }) => {
     await page.route('**/*', route => {
         // Inspect what kind of resource generated the network request.
         if (route.request().resourceType() === 'script') {
-            // Block the intercepted request.
+            // Block the specified resourceType. To know what type the web app is using and loading, go to the Network tab in DevTools, Refresh, and see the Type column.
             route.abort();
         } else {
             // Allow the intercepted request to continue to the network.

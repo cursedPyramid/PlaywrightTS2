@@ -1,6 +1,6 @@
 // Example from m2-setup: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, chromium, webkit, firefox } from '@playwright/test';
+import { chromium, firefox, test, webkit } from '@playwright/test';
 
 // Define a test case (or setup step) with an async function as its body.
 test('Browser support demo', async () => {

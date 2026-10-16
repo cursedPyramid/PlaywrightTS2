@@ -1,6 +1,6 @@
 // Example from m9-networking: demonstrates the Playwright feature covered by this exercise.
 // Import the Playwright classes/functions needed by this file.
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 // 1) Create repo via web API
 // 2) Go to UI and check it exists
@@ -18,9 +18,10 @@ test.use({
     }
 });
 
-// Test lifecycle hook: Runs before every test in the scope.
+// Test lifecycle hook: Runs before every test in the scope. This is the API layer. Request fixture is used to make an API call directly without going through the browser.
 test.beforeEach('Create repo', async ({ request }) => {
 
+    // data is what Playwright calls the payload or body of the request.
     const response = await request.post('user/repos', {
         data: {
             name: REPO
@@ -32,7 +33,7 @@ test.beforeEach('Create repo', async ({ request }) => {
 
 });
 
-// Define a test case (or setup step) with an async function as its body.
+// This is the UI layer. This is the End to End test to verify that the API integration has worked correctly.
 test('Work with newly created repo', async ({ page }) => {
 
     // Navigate the browser page to the specified URL.
@@ -44,7 +45,7 @@ test('Work with newly created repo', async ({ page }) => {
     // other actions with a clean, new repo
 });
 
-// Test lifecycle hook: Runs after every test in the scope.
+// Test lifecycle hook: Runs after every test in the scope. Request fixture is used to make an API call directly without going through the browser.
 test.afterEach('Delete repo', async ({ request }) => {
 
     const response = await request.delete(`repos/cursedPyramid/${REPO}`);
